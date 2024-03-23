@@ -1,8 +1,26 @@
-{-# OPTIONS_GHC -Wno-unused-top-binds #-}
+-- {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 module Dibujo
-  ( encimar,
-  -- agregar las funciones constructoras
+  ( Dibujo,
+    comp,
+    figura,
+    encimar,
+    apilar,
+    juntar,
+    rot45,
+    rotar,
+    espejar,
+    (^^^),
+    (.-.),
+    (///),
+    r90,
+    r180,
+    r270,
+    encimar4,
+    cuarteto,
+    ciclar,
+    mapDib,
+    foldDib,
   )
 where
 
@@ -98,8 +116,7 @@ mapDib f (Apilar x y d e) = Apilar x y (mapDib f d) (mapDib f e)
 -- 2. map (g . f) = mapDib g . mapDib f
 
 -- Cambiar todas las básicas de acuerdo a la función.
-change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
-change f d = mapDib f d
+-- change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
 
 -- Principio de recursión para Dibujos.
 -- Estructura general para la semántica (a no asustarse). Ayuda:
