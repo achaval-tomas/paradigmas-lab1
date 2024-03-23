@@ -25,60 +25,61 @@ infixr 7 .-.
 infixr 8 ///
 
 comp :: Int -> (a -> a) -> a -> a
-comp n f = undefined
+comp 0 _ = id
+comp n f = f . comp (n - 1) f
 
 -- Funciones constructoras
 figura :: a -> Dibujo a
-figura = undefined
+figura = Figura
 
 encimar :: Dibujo a -> Dibujo a -> Dibujo a
-encimar = undefined
+encimar = Encimar
 
 apilar :: Float -> Float -> Dibujo a -> Dibujo a -> Dibujo a
-apilar = undefined
+apilar = Apilar
 
 juntar :: Float -> Float -> Dibujo a -> Dibujo a -> Dibujo a
 juntar = Juntar
 
 rot45 :: Dibujo a -> Dibujo a
-rot45 = undefined
+rot45 = Rot45
 
 rotar :: Dibujo a -> Dibujo a
-rotar = undefined
+rotar = Rotar
 
 espejar :: Dibujo a -> Dibujo a
-espejar = undefined
+espejar = Espejar
 
 (^^^) :: Dibujo a -> Dibujo a -> Dibujo a
-(^^^) = undefined
+(^^^) = Encimar
 
 (.-.) :: Dibujo a -> Dibujo a -> Dibujo a
-(.-.) = undefined
+(.-.) = Apilar 1 1
 
 (///) :: Dibujo a -> Dibujo a -> Dibujo a
-(///) = undefined
+(///) = Juntar 1 1
 
 -- rotaciones
 r90 :: Dibujo a -> Dibujo a
-r90 = undefined
+r90 = Rotar
 
 r180 :: Dibujo a -> Dibujo a
-r180 = undefined
+r180 = Rotar . Rotar
 
 r270 :: Dibujo a -> Dibujo a
-r270 = undefined
+r270 = Rotar . Rotar . Rotar
 
 -- una figura repetida con las cuatro rotaciones, superimpuestas.
 encimar4 :: Dibujo a -> Dibujo a
-encimar4 = undefined
+encimar4 d = Encimar d $ Encimar (r90 d) $ Encimar (r180 d) (r270 d)
 
 -- cuatro figuras en un cuadrante.
 cuarteto :: Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a
-cuarteto = undefined
+cuarteto a b c d = Apilar 1 1 (Juntar 1 1 a b) (Juntar 1 1 c d)
 
 -- un cuarteto donde se repite la imagen, rotada (¡No confundir con encimar4!)
 ciclar :: Dibujo a -> Dibujo a
-ciclar = undefined
+ciclar d = cuarteto d (r90 d) (r180 d) (r270 d)
 
 -- map para nuestro lenguaje
 mapDib :: (a -> b) -> Dibujo a -> Dibujo b
