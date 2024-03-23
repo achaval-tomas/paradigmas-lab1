@@ -102,6 +102,10 @@ change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
 change f d = mapDib f d
 
 -- Principio de recursión para Dibujos.
+-- Estructura general para la semántica (a no asustarse). Ayuda:
+-- pensar en foldr y las definiciones de intro a la lógica
+-- foldDib aplicado a cada constructor de Dibujo debería devolver el mismo
+-- dibujo
 foldDib ::
   (a -> b) ->
   (b -> b) ->
@@ -112,11 +116,11 @@ foldDib ::
   (b -> b -> b) ->
   Dibujo a ->
   b
-foldDib fig rot r45 esp junt api enc d = case d of
-  Figura x -> fig x
-  Rotar x -> rot x
-  Rot45 x -> r45 x
-  Espejar x -> esp x
-  Juntar x y e f -> junt x y e f
-  Apilar x y e f -> api x y e f
-  Encimar x y -> enc x y
+foldDib f rot r45 esp junt api enc dib = case dib of
+  Figura a -> f a
+  Rotar d -> rot $ foldDib f rot r45 esp junt api enc d
+  Rot45 d -> r45 $ foldDib f rot r45 esp junt api enc d
+  Espejar d -> esp $ foldDib f rot r45 esp junt api enc d
+  Juntar x y d d' -> junt x y (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
+  Apilar x y d d' -> api x y (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
+  Encimar d d' -> enc (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
