@@ -86,12 +86,12 @@ ciclar d = cuarteto d (r90 d) (r180 d) (r270 d)
 -- map para nuestro lenguaje
 mapDib :: (a -> b) -> Dibujo a -> Dibujo b
 mapDib f (Figura d) = Figura $ f d
-mapDib f (Rotar d) = Rotar $ f d
-mapDib f (Rot45 d) = Rot45 $ f d
-mapDib f (Espejar d) = Espejar $ f d
-mapDib f (Encimar d e) = Encimar (f d) (f e)
-mapDib f (Juntar x y d e) = Juntar x y (f d) (f e)
-mapDib f (Apilar x y d e) = Apilar x y (f d) (f e)
+mapDib f (Rotar d) = Rotar $ mapDib f d
+mapDib f (Rot45 d) = Rot45 $ mapDib f d
+mapDib f (Espejar d) = Espejar $ mapDib f d
+mapDib f (Encimar d e) = Encimar (mapDib f d) (mapDib f e)
+mapDib f (Juntar x y d e) = Juntar x y (mapDib f d) (mapDib f e)
+mapDib f (Apilar x y d e) = Apilar x y (mapDib f d) (mapDib f e)
 
 -- verificar que las operaciones satisfagan
 -- 1. map figura = id
