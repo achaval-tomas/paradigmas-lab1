@@ -1,10 +1,21 @@
-module Dibujo (encimar, 
-    -- agregar las funciones constructoras
-    ) where
+module Dibujo
+  ( encimar,
+  -- agregar las funciones constructoras
+  )
+where
 
+data TriORect = Triangulo | Rectangulo deriving (Eq, Show)
 
--- nuestro lenguaje 
-data Dibujo a = Dibujo
+-- nuestro lenguaje
+data Dibujo a
+  = Figura a
+  | Rotar (Dibujo a)
+  | Rot45 (Dibujo a)
+  | Espejar (Dibujo a)
+  | Encimar (Dibujo a) (Dibujo a)
+  | Juntar Float Float (Dibujo a) (Dibujo a)
+  | Apilar Float Float (Dibujo a) (Dibujo a)
+  deriving (Eq, Show)
 
 -- combinadores
 infixr 6 ^^^
@@ -16,7 +27,6 @@ infixr 8 ///
 comp :: Int -> (a -> a) -> a -> a
 comp n f = undefined
 
-
 -- Funciones constructoras
 figura :: a -> Dibujo a
 figura = undefined
@@ -27,7 +37,7 @@ encimar = undefined
 apilar :: Float -> Float -> Dibujo a -> Dibujo a -> Dibujo a
 apilar = undefined
 
-juntar  :: Float -> Float -> Dibujo a -> Dibujo a -> Dibujo a
+juntar :: Float -> Float -> Dibujo a -> Dibujo a -> Dibujo a
 juntar = Juntar
 
 rot45 :: Dibujo a -> Dibujo a
@@ -35,7 +45,6 @@ rot45 = undefined
 
 rotar :: Dibujo a -> Dibujo a
 rotar = undefined
-
 
 espejar :: Dibujo a -> Dibujo a
 espejar = undefined
@@ -74,6 +83,7 @@ ciclar = undefined
 -- map para nuestro lenguaje
 mapDib :: (a -> b) -> Dibujo a -> Dibujo b
 mapDib = undefined
+
 -- verificar que las operaciones satisfagan
 -- 1. map figura = id
 -- 2. map (g . f) = mapDib g . mapDib f

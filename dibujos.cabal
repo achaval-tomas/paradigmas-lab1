@@ -23,8 +23,8 @@ name:               dibujos
 version:            0.1.0.0
 
 synopsis:           Laboratorio de Programación Funcional de Paradigmas-FAMAF.
-description:        
-    Recreación del paper de Henderson `Functional Geometry' en Haskell. 
+description:
+    Recreación del paper de Henderson `Functional Geometry' en Haskell.
     La consigna del laboratorio está en https://tinyurl.com/funcional-2024-famaf
 
 license:            Apache-2.0
@@ -60,10 +60,10 @@ executable dibujos
                       InterpHaha,
                       InterpSVG,
                       Pred,
-                      Dibujos.Ejemplo,
+                    --   Dibujos.Ejemplo,
                       Dibujos.Feo,
                       Dibujos.Grilla,
-                      Dibujos.Cuadrados
+                    --   Dibujos.Cuadrados
     exposed-modules:  Dibujo, Pred, Interp
     build-depends:    base ^>=4.17.2.1,
                       gloss ^>=1.13.2.2,
@@ -101,4 +101,4 @@ test-suite haha
     main-is:          TestHaha.hs
     build-depends:    base ^>=4.17.2.1,
                       haha ^>=0.3.1.1
-                      
+

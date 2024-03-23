@@ -6,6 +6,9 @@
 # Node artifact files
 node_modules/
 dist/
+dist-newstyle/
+
+.vscode
 
 # Compiled Java class files
 *.class
