@@ -85,7 +85,13 @@ ciclar d = cuarteto d (r90 d) (r180 d) (r270 d)
 
 -- map para nuestro lenguaje
 mapDib :: (a -> b) -> Dibujo a -> Dibujo b
-mapDib = undefined
+mapDib f (Figura d) = Figura $ f d
+mapDib f (Rotar d) = Rotar $ f d
+mapDib f (Rot45 d) = Rot45 $ f d
+mapDib f (Espejar d) = Espejar $ f d
+mapDib f (Encimar d e) = Encimar (f d) (f e)
+mapDib f (Juntar x y d e) = Juntar x y (f d) (f e)
+mapDib f (Apilar x y d e) = Apilar x y (f d) (f e)
 
 -- verificar que las operaciones satisfagan
 -- 1. map figura = id
@@ -93,7 +99,7 @@ mapDib = undefined
 
 -- Cambiar todas las básicas de acuerdo a la función.
 change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
-change = undefined
+change f d = mapDib f d
 
 -- Principio de recursión para Dibujos.
 foldDib ::
@@ -106,4 +112,11 @@ foldDib ::
   (b -> b -> b) ->
   Dibujo a ->
   b
-foldDib = undefined
+foldDib fig rot r45 esp junt api enc d = case d of
+  Figura x -> fig x
+  Rotar x -> rot x
+  Rot45 x -> r45 x
+  Espejar x -> esp x
+  Juntar x y e f -> junt x y e f
+  Apilar x y e f -> api x y e f
+  Encimar x y -> enc x y
