@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-unused-top-binds #-}
+
 module Dibujo
   ( encimar,
   -- agregar las funciones constructoras
