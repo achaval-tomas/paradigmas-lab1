@@ -44,7 +44,14 @@ sup :: FloatingPic -> FloatingPic -> FloatingPic
 sup f g d w h = pictures [f d w h, g d w h]
 
 jun :: Float -> Float -> FloatingPic -> FloatingPic -> FloatingPic
-jun = undefined
+jun f_weight g_weight f g d w h = pictures [f d f_width h, g d_g g_width h]
+  where
+    total_weight = f_weight + g_weight
+    f_share = f_weight / total_weight
+    g_share = 1 - f_share
+    f_width = mulSV f_share w
+    g_width = mulSV g_share w
+    d_g = d V.+ f_width
 
 api :: Float -> Float -> FloatingPic -> FloatingPic -> FloatingPic
 api wf wg f g d w h = pictures [f df w hf, g d w hg]
