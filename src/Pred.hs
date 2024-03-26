@@ -24,8 +24,11 @@ type Pred a = a -> Bool
 cambiar :: Pred a -> (a -> Dibujo a) -> Dibujo a -> Dibujo a
 cambiar p f = foldDib (\x -> if p x then f x else figura x) rotar rot45 espejar juntar apilar encimar
 
+
 -- Alguna básica satisface el predicado.
-anyDib = undefined
+anyDib :: Pred a -> Dibujo a -> Bool
+anyDib p = foldDib p id id id f f (||)
+  where f _ _ = (||)
 
 -- Todas las básicas satisfacen el predicado.
 allDib = undefined
