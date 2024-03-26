@@ -24,16 +24,17 @@ type Pred a = a -> Bool
 cambiar :: Pred a -> (a -> Dibujo a) -> Dibujo a -> Dibujo a
 cambiar p f = foldDib (\x -> if p x then f x else figura x) rotar rot45 espejar juntar apilar encimar
 
-
 -- Alguna básica satisface el predicado.
 anyDib :: Pred a -> Dibujo a -> Bool
 anyDib p = foldDib p id id id f f (||)
-  where f _ _ = (||)
+  where
+    f _ _ = (||)
 
 -- Todas las básicas satisfacen el predicado.
 allDib :: Pred a -> Dibujo a -> Bool
 allDib p = foldDib p id id id f f (&&)
-  where f _ _ = (&&)
+  where
+    f _ _ = (&&)
 
 -- Los dos predicados se cumplen para el elemento recibido.
 andP :: Pred a -> Pred a -> Pred a
@@ -43,4 +44,5 @@ andP p p' x = p x && p' x
 orP :: Pred a -> Pred a -> Pred a
 orP p p' x = p x || p' x
 
+falla :: Bool
 falla = True
