@@ -36,9 +36,11 @@ allDib p = foldDib p id id id f f (&&)
   where f _ _ = (&&)
 
 -- Los dos predicados se cumplen para el elemento recibido.
-andP = undefined
+andP :: Pred a -> Pred a -> Pred a
+andP p p' x = p x && p' x
 
 -- Algún predicado se cumple para el elemento recibido.
-orP = undefined
+orP :: Pred a -> Pred a -> Pred a
+orP p p' x = p x || p' x
 
 falla = True
