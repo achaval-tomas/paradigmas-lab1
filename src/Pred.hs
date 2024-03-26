@@ -31,7 +31,9 @@ anyDib p = foldDib p id id id f f (||)
   where f _ _ = (||)
 
 -- Todas las básicas satisfacen el predicado.
-allDib = undefined
+allDib :: Pred a -> Dibujo a -> Bool
+allDib p = foldDib p id id id f f (&&)
+  where f _ _ = (&&)
 
 -- Los dos predicados se cumplen para el elemento recibido.
 andP = undefined
