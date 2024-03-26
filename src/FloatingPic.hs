@@ -1,4 +1,5 @@
 {-# LANGUAGE ExistentialQuantification #-}
+
 module FloatingPic
   ( FloatingPic,
     Output,
@@ -20,7 +21,7 @@ type FloatingPic = Vector -> Vector -> Vector -> Picture
 type Output a = a -> FloatingPic
 
 -- Configuración de la interpretación
-data Conf = forall a . Conf 
+data Conf = forall a. Conf
   { name :: String,
     pic :: Dibujo a,
     bas :: Output a
