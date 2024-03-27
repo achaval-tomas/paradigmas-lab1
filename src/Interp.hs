@@ -8,7 +8,7 @@ module Interp
   )
 where
 
-import Dibujo
+import Dibujo (Dibujo, foldDib)
 import FloatingPic
 import Graphics.Gloss (Display (InWindow), Picture, color, display, makeColorI, pictures, translate, white)
 import qualified Graphics.Gloss.Data.Point.Arithmetic as V
@@ -64,4 +64,4 @@ api wf wg f g d w h = pictures [f df w hf, g d w hg]
     df = d V.+ hg
 
 interp :: Output a -> Output (Dibujo a)
-interp b = undefined
+interp intBas dib = foldDib intBas rot r45 esp jun api sup dib
