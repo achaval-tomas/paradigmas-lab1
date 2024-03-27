@@ -28,11 +28,11 @@ initial (Conf n dib intBas) size = display win white $ withGrid fig size
     grey = makeColorI 100 100 100 100
 
 -- Interpretación de (^^^)
-ov :: Picture -> Picture -> Picture
-ov p q = undefined
+ov :: FloatingPic -> FloatingPic -> FloatingPic
+ov f g d w h = pictures [f d w h, g d w h]
 
 r45 :: FloatingPic -> FloatingPic
-r45 = undefined
+r45 f d w h = f (d V.+ 0.5 V.* (w V.+ h)) (0.5 V.* (w V.+ h)) (0.5 V.* (h V.- w))
 
 rot :: FloatingPic -> FloatingPic
 rot f d w h = f (d V.+ w) h (V.negate w)
