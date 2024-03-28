@@ -33,8 +33,9 @@ ov f g d w h = pictures [f d w h, g d w h]
 
 r45 :: FloatingPic -> FloatingPic
 r45 f d w h = f (d V.+ new_w) new_w new_h
-  where new_w = 0.5 V.* (w V.+ h) 
-        new_h = 0.5 V.* (h V.- w)
+  where
+    new_w = 0.5 V.* (w V.+ h)
+    new_h = 0.5 V.* (h V.- w)
 
 rot :: FloatingPic -> FloatingPic
 rot f d w h = f (d V.+ w) h (V.negate w)
