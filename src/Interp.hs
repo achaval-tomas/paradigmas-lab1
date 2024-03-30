@@ -51,20 +51,18 @@ jun f_weight g_weight f g d w h = pictures [f d f_width h, g d_g g_width h]
   where
     total_weight = f_weight + g_weight
     f_share = f_weight / total_weight
-    g_share = 1 - f_share
     f_width = mulSV f_share w
-    g_width = mulSV g_share w
+    g_width = mulSV (1 - f_share) w
     d_g = d V.+ f_width
 
 api :: Float -> Float -> FloatingPic -> FloatingPic -> FloatingPic
-api wf wg f g d w h = pictures [f df w hf, g d w hg]
+api f_weight g_weight f g d w h = pictures [f df w f_height, g d w g_height]
   where
-    wt = wf + wg -- wt: weight total
-    sf = wf / wt -- sf: share of f
-    sg = 1 - sf -- sg: share of g
-    hf = sf `mulSV` h -- hf: height of f
-    hg = sg `mulSV` h -- hg: height of g
-    df = d V.+ hg
+    total_weight = f_weight + g_weight
+    f_share = f_weight / total_weight
+    f_height = mulSV f_share h
+    g_height = mulSV (1 - f_share) h
+    df = d V.+ g_height
 
 interp :: Output a -> Output (Dibujo a)
 interp intBas = foldDib intBas rot r45 esp jun api sup
