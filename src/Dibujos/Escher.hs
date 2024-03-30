@@ -35,7 +35,7 @@ dibujoT fish = encimar fish $ encimar fish2 fish3
 -- Esquina con nivel de detalle en base a la figura p.
 esquina :: Int -> Dibujo Escher -> Dibujo Escher
 esquina 0 _ = vacia
-esquina n p = cuarteto (esquina (n-1) p) (lado n p) (rotar $ lado n p) u
+esquina n p = cuarteto (esquina (n-1) p) (lado (n-1) p) (rotar $ lado (n-1) p) u
   where
     u = dibujoU p
 
@@ -48,15 +48,21 @@ lado n p = cuarteto (lado (n-1) p) (lado (n-1) p) (rotar t) t
     
 
 -- Por suerte no tenemos que poner el tipo!
-noneto p q r s t u v w x = undefined
+noneto :: Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a -> Dibujo a
+noneto p q r s t u v w x =
+    apilar 1 2 (juntar 1 2 p (juntar 1 1 q r))
+               (apilar 1 1 (juntar 1 2 s (juntar 1 1 t u)) (juntar 1 2 v (juntar 1 1 w x)))
 
 -- El dibujo de Escher:
 escher :: Int -> Escher -> Dibujo Escher
-escher = undefined
+escher n p = noneto e l (r270 e) (rotar l) u (r270 l) (rotar e) (r180 l) (r180 e)
+  where e = esquina n $ figura p
+        l = lado n $ figura p
+        u = dibujoU $ figura p
 
 escherConf :: Conf
 escherConf = Conf {
     name = "Escher",
-    pic = esquina 10 $ figura Fish,
+    pic = escher 7 Fish,
     bas = interpBas
 }
