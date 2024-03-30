@@ -4,6 +4,7 @@ import Dibujo (Dibujo, figura, juntar, apilar, rot45, rotar, encimar, espejar)
 import FloatingPic(Conf(..), Output, half, zero)
 import qualified Graphics.Gloss.Data.Point.Arithmetic as V
 import Graphics.Gloss ( Picture, blue, red, color, line, pictures )
+import Dibujos.Utils(column, grilla, row)
 
 -- Les ponemos colorcitos para que no sea _tan_ feo
 data Color = Azul | Rojo
@@ -80,19 +81,6 @@ flipante1 b = espejar $ juntados2 b
 -- Igual al anterior, pero invertido
 flipante2 :: BasicaSinColor -> Dibujo Basica
 flipante2 b = espejar $ apilados2 b
-
-row :: [Dibujo a] -> Dibujo a
-row [] = error "row: no puede ser vacío"
-row [d] = d
-row (d:ds) = juntar 1 (fromIntegral $ length ds) d (row ds)
-
-column :: [Dibujo a] -> Dibujo a
-column [] = error "column: no puede ser vacío"
-column [d] = d
-column (d:ds) = apilar 1 (fromIntegral $ length ds) d (column ds)
-
-grilla :: [[Dibujo a]] -> Dibujo a
-grilla = column . map row
 
 cruzTangulo :: Dibujo Basica
 cruzTangulo = encimar (figRoja Rectangulo) (figAzul Cruz)
