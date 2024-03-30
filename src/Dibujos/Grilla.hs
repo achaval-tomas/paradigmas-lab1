@@ -1,18 +1,25 @@
 module Dibujos.Grilla (
-    grilla
+    grilla,
+    grillaConf,
 ) where
 
-import Dibujo (Dibujo, juntar, apilar)
+import Dibujo (Dibujo, juntar, apilar, figura)
+import Dibujos.Utils(column, grilla, row)
+import FloatingPic (Conf (Conf, bas, name, pic), Output)
+import Graphics.Gloss (text)
+import Graphics.Gloss.Data.Picture (scale, translate)
 
-row :: [Dibujo a] -> Dibujo a
-row [] = error "row: no puede ser vacío"
-row [d] = d
-row (d:ds) = juntar (fromIntegral $ length ds) 1 d (row ds)
+type Basica = (Int, Int)
 
-column :: [Dibujo a] -> Dibujo a
-column [] = error "column: no puede ser vacío"
-column [d] = d
-column (d:ds) = apilar (fromIntegral $ length ds) 1 d (column ds)
+interpBasica :: Output Basica
+interpBasica (x, y) (dx, dy) (w, _) (_, h) =
+    translate (dx + w/2) (dy + h/2) $ scale 0.1 0.1 $ text $ "(" ++ show x ++ "," ++ show y ++ ")"
 
-grilla :: [[Dibujo a]] -> Dibujo a
-grilla = column . map row
+grillaConf :: Conf
+grillaConf =
+  Conf
+    { 
+      name = "Grilla",
+      pic = grilla $ map (\x -> map (\y -> figura (x, y)) [0..7]) [0..7],
+      bas = interpBasica
+    }
