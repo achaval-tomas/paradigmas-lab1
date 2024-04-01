@@ -1,10 +1,11 @@
-module Dibujos.Grilla (
-    grilla,
+module Dibujos.Grilla
+  ( grilla,
     grillaConf,
-) where
+  )
+where
 
-import Dibujo (Dibujo, juntar, apilar, figura)
-import Dibujos.Utils(column, grilla, row)
+import Dibujo (figura)
+import Dibujos.Utils (grilla)
 import FloatingPic (Conf (Conf, bas, name, pic), Output)
 import Graphics.Gloss (text)
 import Graphics.Gloss.Data.Picture (scale, translate)
@@ -13,13 +14,12 @@ type Basica = (Int, Int)
 
 interpBasica :: Output Basica
 interpBasica (x, y) (dx, dy) (w, _) (_, h) =
-    translate (dx + w/2) (dy + h/2) $ scale 0.1 0.1 $ text $ "(" ++ show x ++ "," ++ show y ++ ")"
+  translate (dx + w / 2) (dy + h / 2) $ scale 0.1 0.1 $ text $ "(" ++ show x ++ "," ++ show y ++ ")"
 
 grillaConf :: Conf
 grillaConf =
   Conf
-    { 
-      name = "Grilla",
-      pic = grilla $ map (\x -> map (\y -> figura (x, y)) [0..7]) [0..7],
+    { name = "Grilla",
+      pic = grilla $ map (\x -> map (\y -> figura (x, y)) [0 .. 7]) [0 .. 7],
       bas = interpBasica
     }

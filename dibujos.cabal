@@ -64,6 +64,7 @@ executable dibujos
                       Dibujos.Feo,
                       Dibujos.Grilla,
                       Dibujos.Escher,
+                      Dibujos.Utils,
                     --   Dibujos.Cuadrados
     exposed-modules:  Dibujo, Pred, Interp
     build-depends:    base ^>=4.17.2.1,

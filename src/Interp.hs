@@ -10,7 +10,7 @@ where
 
 import Dibujo (Dibujo, foldDib)
 import FloatingPic
-import Graphics.Gloss (Display (InWindow), Picture, color, display, makeColorI, pictures, translate, white)
+import Graphics.Gloss (Display (InWindow), color, display, makeColorI, pictures, translate, white)
 import qualified Graphics.Gloss.Data.Point.Arithmetic as V
 import Graphics.Gloss.Data.Vector (mulSV)
 
