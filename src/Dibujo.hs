@@ -21,6 +21,7 @@ module Dibujo
     ciclar,
     mapDib,
     foldDib,
+    figuras,
   )
 where
 
@@ -141,3 +142,8 @@ foldDib f rot r45 esp junt api enc dib = case dib of
   Juntar x y d d' -> junt x y (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
   Apilar x y d d' -> api x y (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
   Encimar d d' -> enc (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
+
+figuras :: Dibujo a -> [a]
+figuras = foldDib (: []) id id id f f (++)
+  where
+    f _ _ = (++)
