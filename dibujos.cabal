@@ -76,6 +76,16 @@ executable dibujos
     hs-source-dirs:   src
     default-language: Haskell2010
 
+test-suite dibujo
+    import:           warnings
+    default-language: Haskell2010
+    other-modules:    Dibujo
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test src
+    main-is:          TestDibujo.hs
+    build-depends:    base ^>=4.17.2.1,
+                      HUnit ^>=1.6.2.0
+
 test-suite predicados
     import:           warnings
     default-language: Haskell2010
