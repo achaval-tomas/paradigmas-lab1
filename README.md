@@ -1,6 +1,6 @@
 ---
 title: Laboratorio de Funcional
-author: acá van sus nombres
+author: Tomás Achával, Tomás Maraschio, Tomás Peyronel
 ---
 La consigna del laboratorio está en https://tinyurl.com/funcional-2024-famaf
 
