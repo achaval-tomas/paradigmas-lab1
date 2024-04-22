@@ -34,10 +34,19 @@ Completar
 # 3. Preguntas
 Al responder tranformar cada pregunta en una subsección para que sea más fácil de leer.
 
-1. ¿Por qué están separadas las funcionalidades en los módulos indicados? Explicar detalladamente la responsabilidad de cada módulo.
-2. ¿Por qué las figuras básicas no están incluidas en la definición del lenguaje, y en vez de eso, es un parámetro del tipo?
-3. ¿Qué ventaja tiene utilizar una función de `fold` sobre hacer pattern-matching directo?
-4. ¿Cuál es la diferencia entre los predicados definidos en Pred.hs y los tests?
-
+## ¿Por qué están separadas las funcionalidades en los módulos indicados? Explicar detalladamente la responsabilidad de cada módulo.
+<!-- TODO: ***explicar detalladamente***-->
+Las funcionalidades están separadas en módulos para poder abstraernos de sus implementaciones.<br>
+Módulo Dibujo: Contiene la declaracion de nuestro "lenguaje" y todo lo relacionado a armar y transformar dibujos como tipo/estructura de datos.<br>
+Módulo FloatingPic: Contiene funciones básicas sobre vectores y las definiciones de los tipos FloatingPic (una imagen de un tamaño especificado a renderizar en coordenadas especificadas) y Output (Utilizado como función que convierte un dibujo en una FloatingPic).<br>
+Módulo Interp: Se encarga de interpretar los dibujos y sus transformaciones, ajustando sus coordenadas y tamaños.<br>
+Módulo Pred: Funciones booleanas sobre dibujos.<br>
+Módulo Main: Se encarga de correr el programa, permitiendonos seleccionar un dibujo para mostrarlo en pantalla.
+## ¿Por qué las figuras básicas no están incluidas en la definición del lenguaje, y en vez de eso, es un parámetro del tipo?
+Las figuras básicas son un parámetro del tipo Dibujo por razones de **polimorfismo** => poder crear Dibujos de cualquier tipo de figura básica utilizando la misma estructura y formato. Más aún, podemos transformar un Dibujo de un tipo de figura básica a otro!
+## ¿Qué ventaja tiene utilizar una función de `fold` sobre hacer pattern-matching directo?
+Utilizar la función foldDib nos permite ignorar el despliegue interno de los Dibujos y, con un solo llamado, generar una cadena compuesta de funciones a aplicar sobre sus figuras.
+## ¿Cuál es la diferencia entre los predicados definidos en Pred.hs y los tests?
+<!-- TODO: what -->
 # 4. Extras
-Completar si hacen algo.
+<!-- TODO: @tom explicar como generaste los puntos del escher -->
