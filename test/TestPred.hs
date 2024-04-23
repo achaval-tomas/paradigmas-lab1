@@ -10,35 +10,35 @@ testDib = juntar 1 1 (encimar (figura 10) (figura 8)) (rot45 (figura 5))
 
 testCambiar = TestCase
     ( assertEqual 
-       "cambiar (< 6) (\\x -> figura $x-2) changes 5 to 3"
-        (cambiar (<6) (\x -> figura $ x-2) testDib)
+       "cambiar (<6) (\\x -> figura (x-2)) changes 5 to 3"
+        (cambiar (<6) (\x -> figura (x-2)) testDib)
         (juntar 1 1 (encimar (figura 10) (figura 8)) (rot45 (figura 3)))
     )
 
 testAnyDibTrue = TestCase
     ( assertEqual 
-       "anyDib (< 6) is True"
+       "anyDib (<6) is True"
         (anyDib (<6) testDib)
         True
     )
 
 testAnyDibFalse = TestCase
     ( assertEqual 
-       "anyDib (< 6) is True"
+       "anyDib (>6) is False"
         (anyDib (>20) testDib)
         False
     )
 
 testAllDibTrue = TestCase
     ( assertEqual 
-       "allDib (> 0) is True"
+       "allDib (>0) is True"
         (allDib (>0) testDib)
         True
     )
 
 testAllDibFalse = TestCase
     ( assertEqual 
-       "allDib (> 8) is False"
+       "allDib (>8) is False"
         (allDib (>8) testDib)
         False
     )
