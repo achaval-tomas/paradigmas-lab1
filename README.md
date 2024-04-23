@@ -35,9 +35,8 @@ Completar
 Al responder tranformar cada pregunta en una subsección para que sea más fácil de leer.
 
 ## ¿Por qué están separadas las funcionalidades en los módulos indicados? Explicar detalladamente la responsabilidad de cada módulo.
-<!-- TODO: ***explicar detalladamente***-->
-Las funcionalidades están separadas en módulos para poder abstraernos de sus implementaciones.<br>
-Módulo Dibujo: Contiene la declaracion de nuestro "lenguaje" y todo lo relacionado a armar y transformar dibujos como tipo/estructura de datos.<br>
+Las funcionalidades están separadas en módulos para poder abstraernos de sus implementaciones, y cada uno de estos módulos se encarga de solucionar un problema especifico:<br>
+Módulo Dibujo: Contiene la declaracion de nuestro DSL y todo lo relacionado a armar y transformar dibujos como tipo/estructura de datos.<br>
 Módulo FloatingPic: Contiene funciones básicas sobre vectores y las definiciones de los tipos FloatingPic (una imagen de un tamaño especificado a renderizar en coordenadas especificadas) y Output (Utilizado como función que convierte un dibujo en una FloatingPic).<br>
 Módulo Interp: Se encarga de interpretar los dibujos y sus transformaciones, ajustando sus coordenadas y tamaños.<br>
 Módulo Pred: Funciones booleanas sobre dibujos.<br>
