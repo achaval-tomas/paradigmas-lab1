@@ -89,7 +89,7 @@ test-suite dibujo
 test-suite predicados
     import:           warnings
     default-language: Haskell2010
-    other-modules:    Pred
+    other-modules:    Dibujo, Pred
     type:             exitcode-stdio-1.0
     hs-source-dirs:   test src
     main-is:          TestPred.hs
