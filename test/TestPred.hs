@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures -fno-warn-type-defaults #-}
 module Main (main) where
 
-import Dibujo
+import Dibujo (Dibujo, encimar, figura, rot45, juntar)
 import Pred
 import Test.HUnit
 
