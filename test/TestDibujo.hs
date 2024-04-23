@@ -35,9 +35,9 @@ testMapDib = TestCase (assertEqual "(mapDib not (figura True)) is (figura False)
 testChange = 
   TestCase
     ( assertEqual
-        "(change (\\x -> figura 10)) is (rotar $ rot45 $ espejar $ figura 10)"
-        (change (\_ -> figura 10) compleja)
-        (rotar $ rot45 $ espejar $ figura 10)
+        "(change (\\x -> figura True)) is (rotar $ rot45 $ espejar $ figura True)"
+        (change (\_ -> figura True) compleja)
+        (rotar $ rot45 $ espejar $ figura True)
     )
 
 testFoldDibId =

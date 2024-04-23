@@ -103,20 +103,6 @@ cuarteto a b c d = Apilar 1 1 (Juntar 1 1 a b) (Juntar 1 1 c d)
 ciclar :: Dibujo a -> Dibujo a
 ciclar d = cuarteto d (r90 d) (r180 d) (r270 d)
 
--- map para nuestro lenguaje
-mapDib :: (a -> b) -> Dibujo a -> Dibujo b
-mapDib f (Figura d) = Figura $ f d
-mapDib f (Rotar d) = Rotar $ mapDib f d
-mapDib f (Rot45 d) = Rot45 $ mapDib f d
-mapDib f (Espejar d) = Espejar $ mapDib f d
-mapDib f (Encimar d e) = Encimar (mapDib f d) (mapDib f e)
-mapDib f (Juntar x y d e) = Juntar x y (mapDib f d) (mapDib f e)
-mapDib f (Apilar x y d e) = Apilar x y (mapDib f d) (mapDib f e)
-
--- verificar que las operaciones satisfagan
--- 1. map figura = id
--- 2. map (g . f) = mapDib g . mapDib f
-
 -- Principio de recursión para Dibujos.
 -- Estructura general para la semántica (a no asustarse). Ayuda:
 -- pensar en foldr y las definiciones de intro a la lógica
@@ -140,6 +126,14 @@ foldDib f rot r45 esp junt api enc dib = case dib of
   Juntar x y d d' -> junt x y (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
   Apilar x y d d' -> api x y (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
   Encimar d d' -> enc (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
+
+-- map para nuestro lenguaje
+mapDib :: (a -> b) -> Dibujo a -> Dibujo b
+mapDib f = foldDib (figura . f) rotar rot45 espejar juntar apilar encimar
+
+-- verificar que las operaciones satisfagan
+-- 1. map figura = id
+-- 2. map (g . f) = mapDib g . mapDib f
 
 -- Cambiar todas las básicas de acuerdo a la función.
 change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
