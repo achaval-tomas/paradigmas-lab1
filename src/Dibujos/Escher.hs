@@ -1,8 +1,8 @@
-module Dibujos.Escher (escherConf) where
+module Dibujos.Escher (escherConf, escherHDConf, escherTriConf) where
 
 import Dibujo (Dibujo, apilar, cuarteto, encimar, espejar, figura, juntar, r180, r270, rot45, rotar)
 import FloatingPic (Conf (..), Output)
-import Graphics.Gloss (Color, Picture, Vector, blank, color, line, makeColorI, pictures, polygon, white)
+import Graphics.Gloss (Color, Picture, Vector, blank, color, line, makeColorI, pictures, polygon, white, dark)
 import qualified Graphics.Gloss.Data.Point.Arithmetic as V
 
 data Escher = Fish | FishHD | Blank | Triangulo deriving (Eq, Show)
@@ -10,11 +10,11 @@ data Escher = Fish | FishHD | Blank | Triangulo deriving (Eq, Show)
 vacia :: Dibujo Escher
 vacia = figura Blank
 
-celeste :: Color
-celeste = makeColorI 148 204 252 255
+naranja :: Color
+naranja = makeColorI 255 119 0 255
 
-azul :: Color
-azul = makeColorI 24 141 244 255
+naranjaOsc :: Color
+naranjaOsc = dark naranja
 
 plotPolygon :: Vector -> Vector -> Vector -> [(Float, Float)] -> Picture
 plotPolygon d w h ps = polygon $ map (\(x, y) -> d V.+ (x V.* w) V.+ (y V.* h)) ps
@@ -27,21 +27,21 @@ interpBas Blank _ _ _ = blank
 interpBas Triangulo d w h = plot d w h [(0, 0), (1, 0), (0, 1), (0, 0)]
 interpBas Fish d w h =
   pictures
-    [ color celeste $ plotPolygon d w h [(0.3, 0.518), (0.376, 0.376), (0.5, 0.5), (0.5, 0.748), (0.372, 0.783), (0.191, 0.794)],
-      color celeste $ plotPolygon d w h [(0.25, 0.248), (0, 0), (-0.248, 0.25), (-0.024, 0.571)],
-      color azul $ plot d w h [(0.3, 0.518), (0.376, 0.376), (0.5, 0.5), (0.5, 0.748), (0.372, 0.783), (0.191, 0.794)],
-      color azul $ plot d w h [(0.25, 0.248), (0, 0), (-0.248, 0.25), (-0.024, 0.571)],
-      color azul $ plotPolygon d w h [(-0.033, 0.425), (0, 1), (0.3, 0.677), (0.3, 0.518), (0.378, 0.374), (0.502, 0.25), (0.613, 0.219), (0.768, 0.204), (0.856, 0.102), (1, 0), (0.801, 0.038), (0.684, 0.042), (0.562, 0.031), (0.356, 0.192), (0.106, 0.332), (0.053, 0.387), (-0.033, 0.425)],
-      color celeste $ plotPolygon d w h [(0.053, 0.657), (0.095, 0.697), (0.075, 0.796), (0.051, 0.816), (0.042, 0.741), (0.053, 0.657)],
-      color celeste $ plotPolygon d w h [(0.126, 0.719), (0.111, 0.781), (0.109, 0.841), (0.188, 0.75), (0.126, 0.719)],
-      color white $ plot d w h [(0.111, 0.699), (0.115, 0.681), (0.277, 0.361), (0.372, 0.274), (0.81, 0.077)],
-      plot d w h [(0.301, 0.708), (0.356, 0.721), (0.412, 0.721), (0.478, 0.69)],
-      plot d w h [(0.338, 0.608), (0.403, 0.637), (0.485, 0.626)],
-      plot d w h [(0.345, 0.502), (0.4, 0.551), (0.431, 0.562), (0.485, 0.564)],
-      plot d w h [(0.153, 0.281), (0.04, 0.168), (-0.024, 0.064)],
-      plot d w h [(0.097, 0.325), (0, 0.246), (-0.086, 0.128)],
-      plot d w h [(0.051, 0.37), (-0.058, 0.291), (-0.111, 0.201)],
-      plot d w h [(-0.026, 0.405), (-0.123, 0.326), (-0.176, 0.236)]
+    [ color naranjaOsc $ plotPolygon d w h [(0.3, 0.518), (0.376, 0.376), (0.5, 0.5), (0.5, 0.748), (0.372, 0.783), (0.191, 0.794)],
+      color naranjaOsc $ plotPolygon d w h [(0.25, 0.248), (0, 0), (-0.248, 0.25), (-0.024, 0.571)],
+      plot d w h [(0.3, 0.518), (0.376, 0.376), (0.5, 0.5), (0.5, 0.748), (0.372, 0.783), (0.191, 0.794)],
+      plot d w h [(0.25, 0.248), (0, 0), (-0.248, 0.25), (-0.024, 0.571)],
+      color naranja $ plotPolygon d w h [(-0.033, 0.425), (0, 1), (0.3, 0.677), (0.3, 0.518), (0.378, 0.374), (0.502, 0.25), (0.613, 0.219), (0.768, 0.204), (1, 0), (0.562, 0.031), (0.356, 0.192), (0.106, 0.332), (0.053, 0.387), (-0.033, 0.425)],
+      plotPolygon d w h [(0.053, 0.657), (0.095, 0.697), (0.075, 0.796), (0.051, 0.816), (0.042, 0.741), (0.053, 0.657)],
+      plotPolygon d w h [(0.126, 0.719), (0.111, 0.781), (0.109, 0.841), (0.188, 0.75), (0.126, 0.719)],
+      plot d w h [(0.111, 0.699), (0.115, 0.681), (0.277, 0.361), (0.372, 0.274), (0.81, 0.077)],
+      color white $ plot d w h [(0.301, 0.708), (0.356, 0.721), (0.412, 0.721), (0.478, 0.69)],
+      color white $ plot d w h [(0.338, 0.608), (0.403, 0.637), (0.485, 0.626)],
+      color white $ plot d w h [(0.345, 0.502), (0.4, 0.551), (0.431, 0.562), (0.485, 0.564)],
+      color white $ plot d w h [(0.153, 0.281), (0.04, 0.168), (-0.024, 0.064)],
+      color white $ plot d w h [(0.097, 0.325), (0, 0.246), (-0.086, 0.128)],
+      color white $ plot d w h [(0.051, 0.37), (-0.058, 0.291), (-0.111, 0.201)],
+      color white $ plot d w h [(-0.026, 0.405), (-0.123, 0.326), (-0.176, 0.236)]
     ]
 interpBas FishHD d w h =
   pictures
@@ -132,6 +132,22 @@ escherConf :: Conf
 escherConf =
   Conf
     { name = "Escher",
+      pic = escher 7 Fish,
+      bas = interpBas
+    }
+
+escherHDConf :: Conf
+escherHDConf =
+  Conf
+    { name = "EscherHD",
       pic = escher 7 FishHD,
+      bas = interpBas
+    }
+
+escherTriConf :: Conf
+escherTriConf =
+  Conf
+    { name = "EscherTri",
+      pic = escher 7 Triangulo,
       bas = interpBas
     }

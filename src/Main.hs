@@ -1,7 +1,7 @@
 module Main (main) where
 
 import Control.Monad (when)
-import Dibujos.Escher (escherConf)
+import Dibujos.Escher (escherConf, escherHDConf, escherTriConf)
 import Dibujos.Feo (feoConf)
 import Dibujos.Grilla (grillaConf)
 import FloatingPic (Conf (..))
@@ -15,7 +15,7 @@ import System.IO (hFlush, stdout)
 -- Lista de configuraciones de los dibujos
 configs :: [Conf]
 -- configs = [ejemploConf, feoConf,cuadConf 3]
-configs = [feoConf, grillaConf, escherConf]
+configs = [feoConf, grillaConf, escherConf, escherHDConf, escherTriConf]
 
 configsH :: [ConfH]
 configsH = map (\(Conf n p _) -> simpleHaha n p) configs
