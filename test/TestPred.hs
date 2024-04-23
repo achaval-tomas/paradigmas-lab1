@@ -24,7 +24,7 @@ testAnyDibTrue = TestCase
 
 testAnyDibFalse = TestCase
     ( assertEqual 
-       "anyDib (>6) is False"
+       "anyDib (>20) is False"
         (anyDib (>20) testDib)
         False
     )
