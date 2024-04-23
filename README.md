@@ -8,25 +8,25 @@ La consigna del laboratorio está en https://tinyurl.com/funcional-2024-famaf
 Pueden usar esta checklist para indicar el avance.
 
 ## Verificación de que pueden hacer las cosas.
-- [ ] Haskell instalado y testeos provistos funcionando. (En Install.md están las instrucciones para instalar.)
+- [x] Haskell instalado y testeos provistos funcionando. (En Install.md están las instrucciones para instalar.)
 
 ## 1.1. Lenguaje
-- [ ] Módulo `Dibujo.hs` con el tipo `Dibujo` y combinadores. Puntos 1 a 3 de la consigna.
-- [ ] Definición de funciones (esquemas) para la manipulación de dibujos.
-- [ ] Módulo `Pred.hs`. Punto extra si definen predicados para transformaciones innecesarias (por ejemplo, espejar dos veces es la identidad).
+- [x] Módulo `Dibujo.hs` con el tipo `Dibujo` y combinadores. Puntos 1 a 3 de la consigna.
+- [x] Definición de funciones (esquemas) para la manipulación de dibujos.
+- [x] Módulo `Pred.hs`. Punto extra si definen predicados para transformaciones innecesarias (por ejemplo, espejar dos veces es la identidad).
 
 ## 1.2. Interpretación geométrica
-- [ ] Módulo `Interp.hs`.
+- [x] Módulo `Interp.hs`.
 
 ## 1.3. Expresión artística (Utilizar el lenguaje)
-- [ ] El dibujo de `Dibujos/Feo.hs` se ve lindo.
-- [ ] Módulo `Dibujos/Grilla.hs`.
-- [ ] Módulo `Dibujos/Escher.hs`.
-- [ ] Listado de dibujos en `Main.hs`.
+- [x] El dibujo de `Dibujos/Feo.hs` se ve lindo.
+- [x] Módulo `Dibujos/Grilla.hs`.
+- [x] Módulo `Dibujos/Escher.hs`.
+- [x] Listado de dibujos en `Main.hs`.
 
 ## 1.4 Tests
-- [ ] Tests para `Dibujo.hs`.
-- [ ] Tests para `Pred.hs`.
+- [x] Tests para `Dibujo.hs`.
+- [x] Tests para `Pred.hs`.
 
 # 2. Experiencia
 Completar
@@ -43,10 +43,15 @@ Módulo Interp: Se encarga de interpretar los dibujos y sus transformaciones, aj
 Módulo Pred: Funciones booleanas sobre dibujos.<br>
 Módulo Main: Se encarga de correr el programa, permitiendonos seleccionar un dibujo para mostrarlo en pantalla.
 ## ¿Por qué las figuras básicas no están incluidas en la definición del lenguaje, y en vez de eso, es un parámetro del tipo?
-Las figuras básicas son un parámetro del tipo Dibujo por razones de **polimorfismo** => poder crear Dibujos de cualquier tipo de figura básica utilizando la misma estructura y formato. Más aún, podemos transformar un Dibujo de un tipo de figura básica a otro!
+Las figuras básicas son un parámetro del tipo Dibujo por razones de **polimorfismo** => poder crear Dibujos de cualquier tipo de figura básica utilizando la misma estructura y formato. Más aún, ¡podemos transformar un Dibujo de un tipo de figura básica a otro!
 ## ¿Qué ventaja tiene utilizar una función de `fold` sobre hacer pattern-matching directo?
-Utilizar la función foldDib nos permite ignorar el despliegue interno de los Dibujos y, con un solo llamado, generar una cadena compuesta de funciones a aplicar sobre sus figuras.
+Utilizar la función foldDib nos permite ignorar la implementación interna de los Dibujos (por lo tanto, sus constructores podrian cambiar de nombre sin problemas) y, con un solo llamado, generar una cadena compuesta de funciones a aplicar sobre sus figuras.
 ## ¿Cuál es la diferencia entre los predicados definidos en Pred.hs y los tests?
-<!-- TODO: what -->
+En Pred.hs están definidas funciones que se usan para definir predicados,
+mientras que en los tests definimos algunos predicados que queremos que sean ciertos
+en base a las funciones definidas en Pred.hs.
 # 4. Extras
-<!-- TODO: @tom explicar como generaste los puntos del escher -->
+Para implementar interpBas FishHD en Escher.hs, primero dibujamos un SVG en un editor
+vectorial. Luego, creamos un script que convierte un SVG con curvas a una serie de secuencias
+de puntos.
+
