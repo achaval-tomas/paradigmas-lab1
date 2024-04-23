@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+{-# OPTIONS_GHC -fno-warn-missing-signatures -fno-warn-type-defaults #-}
 
 module Main (main) where
 
@@ -32,6 +32,14 @@ testMapDibId = TestCase (assertEqual "(mapDib id) is id" (mapDib id compleja) co
 
 testMapDib = TestCase (assertEqual "(mapDib not (figura True)) is (figura False)" (mapDib not (figura True)) (figura False))
 
+testChange = 
+  TestCase
+    ( assertEqual
+        "(change (\\x -> figura 10)) is (rotar $ rot45 $ espejar $ figura 10)"
+        (change (\_ -> figura 10) compleja)
+        (rotar $ rot45 $ espejar $ figura 10)
+    )
+
 testFoldDibId =
   TestCase
     ( assertEqual
@@ -62,6 +70,7 @@ tests =
       TestLabel "test r270 with comp" testR270Comp,
       TestLabel "test mapDib id" testMapDibId,
       TestLabel "test mapDib" testMapDib,
+      TestLabel "test change" testChange,
       TestLabel "test foldDib id" testFoldDibId,
       TestLabel "test foldDib" testFoldDib,
       TestLabel "test figuras" testFiguras

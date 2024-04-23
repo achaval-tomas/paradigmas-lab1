@@ -20,6 +20,7 @@ module Dibujo
     cuarteto,
     ciclar,
     mapDib,
+    change,
     foldDib,
     figuras,
   )
@@ -117,7 +118,8 @@ mapDib f (Apilar x y d e) = Apilar x y (mapDib f d) (mapDib f e)
 -- 2. map (g . f) = mapDib g . mapDib f
 
 -- Cambiar todas las básicas de acuerdo a la función.
--- change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
+change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
+change f = foldDib f rotar rot45 espejar juntar apilar encimar
 
 -- Principio de recursión para Dibujos.
 -- Estructura general para la semántica (a no asustarse). Ayuda:
