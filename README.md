@@ -29,10 +29,14 @@ Pueden usar esta checklist para indicar el avance.
 - [x] Tests para `Pred.hs`.
 
 # 2. Experiencia
-Completar
+Hacer el laboratorio fue una buena experiencia, nos hizo recordar Haskell (incluso aprender más) y también tuvo algunas dificultades que supimos enfrentar. La checklist fue útil para trabajar paso a paso.<br>
+Está bueno hacer programas que tengan un output visual, de esta forma es más entretenido y da lugar a algo más de creatividad. Fue interesante aprender sobre Gloss, y su [documentación](https://hackage.haskell.org/package/gloss), simple pero completa, fue muy útil.<br>
+Algunas observaciones y sugerencias desde nuestro punto de vista:<br>
+- Quizás la explicación en comentarios de algunas funciones como foldDib nos pareció insuficiente (por ej, ¿Qué representa cada argumento?).
+- El módulo definido en Pred.hs nos resultó poco útil por fuera de los tests, quizás algun punto más en la consigna podría dar lugar a su utilización.
+- El código del kickstart _no coincidía_ al 100% con el del enunciado, por lo tanto algunas partes se volvieron confusas.
 
 # 3. Preguntas
-Al responder tranformar cada pregunta en una subsección para que sea más fácil de leer.
 
 ## ¿Por qué están separadas las funcionalidades en los módulos indicados? Explicar detalladamente la responsabilidad de cada módulo.
 Las funcionalidades están separadas en módulos para poder abstraernos de sus implementaciones, y cada uno de estos módulos se encarga de solucionar un problema especifico:<br>
