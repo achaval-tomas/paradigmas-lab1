@@ -117,10 +117,6 @@ mapDib f (Apilar x y d e) = Apilar x y (mapDib f d) (mapDib f e)
 -- 1. map figura = id
 -- 2. map (g . f) = mapDib g . mapDib f
 
--- Cambiar todas las básicas de acuerdo a la función.
-change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
-change f = foldDib f rotar rot45 espejar juntar apilar encimar
-
 -- Principio de recursión para Dibujos.
 -- Estructura general para la semántica (a no asustarse). Ayuda:
 -- pensar en foldr y las definiciones de intro a la lógica
@@ -144,6 +140,10 @@ foldDib f rot r45 esp junt api enc dib = case dib of
   Juntar x y d d' -> junt x y (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
   Apilar x y d d' -> api x y (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
   Encimar d d' -> enc (foldDib f rot r45 esp junt api enc d) (foldDib f rot r45 esp junt api enc d')
+
+-- Cambiar todas las básicas de acuerdo a la función.
+change :: (a -> Dibujo b) -> Dibujo a -> Dibujo b
+change f = foldDib f rotar rot45 espejar juntar apilar encimar
 
 figuras :: Dibujo a -> [a]
 figuras = foldDib (: []) id id id f f (++)
